@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: #22223b;
+            margin: 0;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            color: #22223b;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+        }
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+             align-items: center;
+        }
+        h1 {
+            color: rgb(211, 211, 230);
+            text-align: center;
+        }
+        h3 {
+            font-size: 40px;
+            font-weight: bold;
+            font-style: italic;
+            color: rgb(8, 8, 8);
+            text-align: center;
+        }
+        p {
+            font-size: 20px;
+            line-height: 1.6;
+            color: rgb(8, 8, 8);
+            word-spacing: 2px;
+        }
+        button {
+            background-color: #22223b;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #4a4e69;
+        }
+    </style>
+</head>
+<body>
+    <!--<h1>Welcome to My Webpage</h1>
+    <p>This webpage includes headings,paragraphs,images, and links.
+        It is styled with color,fonts and spacing for readability.
+    </p>-->
+   
+        <h1>Beautiful Place in India</h1>
+        
+         <div class="container">
+            <h3>Taj Mahal</h3> <!--Heading tag-->
+        <img src="tajmahal.jpeg" width="500"> <!--Image tag-->
+        <p>The Taj Mahal is an iconic white marble mausoleum located in Agra, India. 
+            Built by Mughal Emperor Shah Jahan in memory of his wife Mumtaz Mahal, 
+            it is renowned for its stunning architecture and 
+                is considered one of the Seven Wonders of the World.
+                The Taj Mahal was constructed between 1631 and 1653 and is a UNESCO World Heritage Site. 
+                The monument attracts millions of visitors each year and is admired for its intricate marble inlay work, symmetry, and the romantic story behind its creation.
+            </p><!--paragraph tag-->
+        <p>For more information, visit the 
+            <!--linktag--><a href="https://en.wikipedia.org/wiki/Taj_Mahal" target="_blank">
+            Taj Mahal Wikipedia page</a>.</p>
+        <button onclick="showmsg()">Click Me!</button><!--Button-->
+        </div>
+        <!--Javascript code for alert msg-->
+        <script>
+            function showmsg() {
+                alert("Thank you for visiting the Taj Mahal!");
+            }
+</script>
+</body>
+</html>
