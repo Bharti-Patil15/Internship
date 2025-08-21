@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+     <style>
+        body{
+            background:linear-gradient(135deg,#667eea,#764ba2);
+            color: #fff;
+            flex-direction: column;
+            display: flex;
+           justify-content: center;
+           align-items: center;
+        }
+        .wrapper {
+          display: flex;
+          gap: 300px;
+        }
+        .container {
+           max-width: 500px;
+           width: 100%;
+           margin: 0 auto;
+           background-color: #2a2a40;
+           padding: 30px;
+           border-radius: 10px;
+           box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+           display: flex;
+           flex-direction: column;
+           gap: 8px;
+          justify-content: center;
+           align-items: center;
+        }
+        
+        .cinfo {
+          display: block;
+          margin-bottom: 5px;
+          font-weight: bold;
+          padding: 5px;
+          border-radius: 5px;
+          border: 1px solid #444;
+          background-color: #222;
+          color: #fff;
+          outline: none;
+        }
+        b{
+          font-weight: bold;
+          color: #fff;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+          font-size: 2.2rem;
+          padding: 15px 10px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+     
+        #add-task {
+          background-color: #38a169;
+          color: #fff;
+          border: none;
+          cursor: pointer;
+          padding: 8px 16px;
+          margin-left: 10px;
+          border-radius: 5px;
+          font-size: 1rem;
+          transition: background 0.2s;
+        }
+        #add-task:hover {
+          background-color: #2f855a;
+        }
+        #remove-task {
+          background-color: #e53e3e;
+          color: #fff;
+          border: none;
+          cursor: pointer;
+          padding: 8px 16px;
+          margin-left: 10px;
+          border-radius: 5px;
+          font-size: 1rem;
+          transition: background 0.2s;
+        }
+        #remove-task:hover {
+          background-color: #c53030;
+        }
+    </style>
+</head>
+<body>    
+  <b>Contact & To-Do List</b>  
+  <div class="wrapper">     
+    <form id="contactinfo">
+    <div class="container">
+        <h1>Contact</h1>
+     <label> Name:</label>
+    <input type="text" id="name" class="cinfo" required>
+   <label>Email:</label>
+   <input type="email" id="email" class="cinfo" required>
+   <input type="submit" id="submit" value="Submit" class="cinfo"></div></form>
+    <form id="todo">
+        <div class="container">
+          <b>To-Do List</b>
+            <label>Task:</label>
+            <input type="text" id="task" class="cinfo" required>
+            <label>Due Date:</label>
+               <input type="date" id="due-date" class="cinfo" required>
+               <button type="button" id="add-task" class="cinfo">Add</button>
+               <button type="button" id="remove-task" class="cinfo">Remove</button>
+        </div>
+      </div>
+    </form>
+    <script>
+    document.getElementById('contactinfo').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const n = document.getElementById('name').value.trim();
+      const e1 = document.getElementById('email').value.trim();
+      if (n && e1) {
+        alert(`Contact submitted:\nName: ${n}\nEmail: ${e1}`);
+        this.reset();
+      }
+    });
+
+    const td = document.getElementById('todo');
+    const taskInput = document.getElementById('task');
+    const dueDateInput = document.getElementById('due-date');
+    const addTaskBtn = document.getElementById('add-task');
+    const removeTaskBtn = document.getElementById('remove-task');
+
+    // Create a list to show tasks
+    const taskList = document.createElement('ul');
+    taskList.style.listStyle = 'none';
+    taskList.style.padding = '0';
+    taskList.style.width = '100%';
+    taskList.style.marginTop = '10px';
+    td.querySelector('.container').appendChild(taskList);
+
+    addTaskBtn.addEventListener('click', function() {
+      const task = taskInput.value.trim();
+      const dueDate = dueDateInput.value;
+      if (task && dueDate) {
+        const li = document.createElement('li');
+        li.textContent = `${task} (Due: ${dueDate})`;
+        li.style.background = '#444';
+        li.style.color = '#fff';
+        li.style.padding = '8px';
+        li.style.marginBottom = '5px';
+        li.style.borderRadius = '5px';
+        taskList.appendChild(li);
+        taskInput.value = '';
+        dueDateInput.value = '';
+      }
+    });
+
+    removeTaskBtn.addEventListener('click', function() {
+      if (taskList.lastChild) {
+        taskList.removeChild(taskList.lastChild);
+      }
+    });
+    </script>
+</body>
+</html>
