@@ -6,10 +6,10 @@
     <title>Document</title>
      <style>
         body{
-            background:linear-gradient(135deg,#667eea,#764ba2);
-            color: #fff;
-            flex-direction: column;
-            display: flex;
+           background:linear-gradient(135deg,#667eea,#764ba2);
+           color: #fff;
+           flex-direction: column;
+           display: flex;
            justify-content: center;
            align-items: center;
         }
@@ -17,31 +17,62 @@
           display: flex;
           gap: 300px;
         }
-        .container {
-           max-width: 500px;
-           width: 100%;
-           margin: 0 auto;
-           background-color: #2a2a40;
-           padding: 30px;
-           border-radius: 10px;
-           box-shadow: 0 4px 16px rgba(0,0,0,0.2);
-           display: flex;
-           flex-direction: column;
-           gap: 8px;
+        nav {
+          width: 100%;
+          display: flex;
           justify-content: center;
-           align-items: center;
+          gap: 40px;
+          background: rgba(42, 42, 64, 0.85);
+          padding: 16px 0;
+          border-radius: 8px;
+          margin-bottom: 24px;
         }
-        
-        .cinfo {
-          display: block;
-          margin-bottom: 5px;
+
+        nav a {
+          color: #fff;
+          text-decoration: none;
           font-weight: bold;
-          padding: 5px;
+          font-size: 1.5rem;
+          padding: 8px 16px;
+          border-radius: 5px;
+          transition: background 0.2s, color 0.2s;
+        }
+
+        nav a:hover {
+          background: #667eea;
+          color: #222;
+        }
+        .container {
+            max-width: 500px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: #2a2a40;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: center;
+        }
+        .container.grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 8px;
+            align-items: center;
+        }
+        .cinfo {
+          display: flex;
+          align-items: center;
+          margin-bottom: 8px;
+          font-weight: bold;
+          padding: 8px;
           border-radius: 5px;
           border: 1px solid #444;
           background-color: #222;
           color: #fff;
           outline: none;
+          grid-column: 1 / -1;
         }
         b{
           font-weight: bold;
@@ -85,31 +116,35 @@
         }
     </style>
 </head>
-<body>    
-  <b>Contact & To-Do List</b>  
-  <div class="wrapper">     
+<body>  
+  <nav>
+    <a href="#contact">Contact</a>
+    <a href="#todo">To-Do List</a>
+  </nav>  
+  <b>Contact & To-Do List</b>
+  <div class="wrapper">
     <form id="contactinfo">
-    <div class="container">
+      <div class="container">
         <h1>Contact</h1>
-     <label> Name:</label>
-    <input type="text" id="name" class="cinfo" required>
-   <label>Email:</label>
-   <input type="email" id="email" class="cinfo" required>
-   <input type="submit" id="submit" value="Submit" class="cinfo"></div></form>
-    <form id="todo">
-        <div class="container">
-          <b>To-Do List</b>
-            <label>Task:</label>
-            <input type="text" id="task" class="cinfo" required>
-            <label>Due Date:</label>
-               <input type="date" id="due-date" class="cinfo" required>
-               <button type="button" id="add-task" class="cinfo">Add</button>
-               <button type="button" id="remove-task" class="cinfo">Remove</button>
-        </div>
+        <label>Name:</label>
+        <input type="text" id="name" class="cinfo" required>
+        <label>Email:</label>
+        <input type="email" id="email" class="cinfo" required>
+        <input type="submit" id="submit" value="Submit" class="cinfo">
       </div>
     </form>
-    <script>
-    document.getElementById('contactinfo').addEventListener('submit', function(e) {
+    <div class="container" id="todo">
+      <b>To-Do List</b>
+      <label>Task:</label>
+      <input type="text" id="taskInput" class="cinfo" required>
+      <button onclick="addTask()">Add Task</button>
+      <ul id="taskList"></ul>
+    </div>
+  </div>
+</body>
+<script>
+    document.getElementById('contactinfo').addEventListener('submit', function(e) 
+    {
       e.preventDefault();
       const n = document.getElementById('name').value.trim();
       const e1 = document.getElementById('email').value.trim();
@@ -118,43 +153,22 @@
         this.reset();
       }
     });
+ function addTask() 
+    {
+      let input = document.getElementById("taskInput");
+      let task = input.value.trim();
+      if (task === "")
+     {
+        alert("Enter a task!");
+        return;
+    }
+      let li = document.createElement("li");
+      li.innerHTML = `${task} <span class="remove" onclick="this.parentElement.remove()">❌</span>`;
+      document.getElementById("taskList").appendChild(li);
 
-    const td = document.getElementById('todo');
-    const taskInput = document.getElementById('task');
-    const dueDateInput = document.getElementById('due-date');
-    const addTaskBtn = document.getElementById('add-task');
-    const removeTaskBtn = document.getElementById('remove-task');
-
-    // Create a list to show tasks
-    const taskList = document.createElement('ul');
-    taskList.style.listStyle = 'none';
-    taskList.style.padding = '0';
-    taskList.style.width = '100%';
-    taskList.style.marginTop = '10px';
-    td.querySelector('.container').appendChild(taskList);
-
-    addTaskBtn.addEventListener('click', function() {
-      const task = taskInput.value.trim();
-      const dueDate = dueDateInput.value;
-      if (task && dueDate) {
-        const li = document.createElement('li');
-        li.textContent = `${task} (Due: ${dueDate})`;
-        li.style.background = '#444';
-        li.style.color = '#fff';
-        li.style.padding = '8px';
-        li.style.marginBottom = '5px';
-        li.style.borderRadius = '5px';
-        taskList.appendChild(li);
-        taskInput.value = '';
-        dueDateInput.value = '';
-      }
-    });
-
-    removeTaskBtn.addEventListener('click', function() {
-      if (taskList.lastChild) {
-        taskList.removeChild(taskList.lastChild);
-      }
-    });
+       input.value = "";
+    }
+   
     </script>
 </body>
 </html>
