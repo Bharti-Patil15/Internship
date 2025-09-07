@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Game</title>
+    <link rel="stylesheet" href="design.css">
+</head>
+<body>
+    <div  class="wrapper">
+    <div class="container">
+         <h1> QUIZ</h1><br>
+        <div id="question-container" class="abc hide">
+            <div id="question" class="question-text"></div>
+
+            <div id="answer-buttons" class="xyz"></div>
+
+            <div class="controls">
+                <button id="next-btn" class="nxt-btn btn hide">Next</button>
+                <button id="restart-btn" class="btn hide">Restart</button>
+            </div>
+
+            <div class="scr">
+                <span id="score"></span>
+        
+            </div>
+        </div>
+       
+        <button id="start-btn" class="srt-btn btn">Start</button>
+    </div>
+     <div class="container">
+        <h1>Weather</h1>
+        <input type="text" id="cityInput" placeholder="Enter city name">
+<button id="btnwtr" onclick="getWeather()">Get Weather</button>
+
+        <div id="weather" class="weather"></div>
+    </div>
+</div>
+    <script src="logic.js"></script>
+</body>
+</html>
