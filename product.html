@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Product Page</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f6f8;
+      margin: 0;
+      padding: 20px;
+      color: #333;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #eff2f4;
+      background-color: #093561;
+    }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      margin-bottom: 30px;
+    }
+
+    .filters select,
+    .filters input {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 16px;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .filters select:hover,
+    .filters input:hover {
+      border-color: #3498db;
+      box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+    }
+
+    #priceLabel {
+      font-weight: bold;
+      margin-top: 5px;
+    }
+
+    .product-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 25px;
+    }
+
+    .product {
+      background-color: #fff;
+      border-radius: 10px;
+      padding: 15px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      overflow: hidden;
+    }
+
+    .product:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    }
+    .product-img {
+  width: 100%;
+  height: 200px;
+  object-fit: contain; 
+  background-color: #f0f0f0; 
+  border-radius: 8px;
+  margin-bottom: 10px;
+  transition: transform 0.3s ease;
+}
+
+    .product:hover .product-img {
+      transform: scale(1.05);
+    }
+
+    .product h3 {
+      margin: 0 0 10px;
+      font-size: 18px;
+      color: #34495e;
+    }
+
+    .product p {
+      margin: 6px 0;
+      font-size: 14px;
+      color: #555;
+    }
+
+    .product p:last-child {
+      font-weight: bold;
+      color: #e67e22;
+    }
+
+    @media (max-width: 600px) {
+      .filters {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .product-list {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>🛍️ Product Catalog</h1>
+
+   <div class="filters">
+    <select id="categoryFilter">
+      <option value="all">All Categories</option>
+      <option value="electronics">Electronics</option>
+      <option value="fashion">Fashion</option>
+      <option value="books">Books</option>
+    </select>
+
+    <input type="range" id="priceFilter" min="0" max="20000" step="500" />
+    <span id="priceLabel">Max Price: ₹20000</span>
+
+    <select id="sortOption">
+      <option value="none">Sort by</option>
+      <option value="ratingHigh">Rating: High to Low</option>
+      <option value="ratingLow">Rating: Low to High</option>
+      <option value="priceHigh">Price: High to Low</option>
+      <option value="priceLow">Price: Low to High</option>
+    </select>
+  </div>
+
+
+  <div id="productList" class="product-list"></div>
+
+  <script>
+    const products = [
+      {
+        name: "Smartphone",
+        pname:"Techno",
+        category: "electronics",
+        price: 10500,
+        rating: 2.5,
+        image: "p1.jpg"
+      },
+      {
+        name: "Laptop",
+        pname:"Walker Laptop",
+        category: "electronics",
+        price: 19000,
+        rating: 4.8,
+        image: "l3.jpg"
+      },
+      {
+        name: "Smartphone",
+        pname:"Nokia",
+        category: "electronics",
+        price: 16500,
+        rating: 4.5,
+        image: "p3.jpg"
+      },
+      {
+        name: "Smartphone",
+        pname:"Redmi",
+        category: "electronics",
+        price: 17800,
+        rating: 3.5,
+        image: "p4.jpg"
+      },
+      {
+        name: "Jeans",
+        category: "fashion",
+        pname:"Straight Leg Jeans",
+        price: 460,
+        rating: 4.5,
+        image: "j1.jpg"
+      },
+      {
+        name: "Jeans",
+        category: "fashion",
+        pname:"Men's Regular Fit Jeans",
+        price: 300,
+        rating: 3.0,
+        image: "j2.jpg"
+      },
+      {
+        name: "Laptop",
+        pname:"Dell Inspiron 15.6 Laptop",
+        category: "electronics",
+        price: 18500,
+        rating: 4.8,
+        image: "l4.jpg"
+      },
+      {
+        name: "Jeans",
+        category: "fashion",
+        pname:"Mide Rise Strachable Jeans",
+        price: 250,
+        rating: 3.6,
+        image: "j3.jpg"
+      },
+     
+      {
+        name: "Laptop",
+        pname:"HP Pavilion Plus Laptop",
+        category: "electronics",
+        price: 12550,
+        rating: 4.6,
+        image: "l2.jpg"
+      },
+      {
+        name: "T-shirt",
+        pname: "Men Solid Polo Neck T-shirt",
+        category: "fashion",
+        price: 290,
+        rating: 3.7,
+        image: "s2.jpg"
+      },
+      {
+        name: "Novel",
+        pname : "वाटसरू",
+        category: "books",
+        price: 700,
+        rating: 3.8,
+        image: "n1.jpg"
+      },
+       {
+        name:"Textbook",
+        pname:"Fabric-Science",
+        category: "books",
+        price: 250,
+        rating: 3.2,
+        image: "t4.jpg"
+      },
+      {
+        name: "Novel",
+        pname: "शून्य",
+        category: "books",
+        price: 580,
+        rating: 4.5,
+        image: "n2.jpg"
+      },
+       {
+        name: "Smartphone",
+        pname:"Vivo",
+        category: "electronics",
+        price: 13000,
+        rating: 3.7,
+        image: "p2.jpg"
+      },
+       {
+        name: "Jeans",
+        category: "fashion",
+        pname:"Mid-Rise Jeans",
+        price: 190,
+        rating: 5.0,
+        image: "j5.jpg"
+      },
+       {
+        name: "Novel",
+         pname : "बंडाचा वणवा",
+        category: "books",
+        price: 950,
+        rating: 4.8,
+        image: "n3.jpg"
+      },
+      {
+        name: "T-shirt",
+        pname: "Cotton Oversized T-shirt",
+        category: "fashion",
+        price: 350,
+        rating: 4.5,
+        image: "s1.jpg"
+      },
+       {
+        name: "Novel",
+        pname: "OLD MAN and THE SEA",
+        category: "books",
+        price: 675,
+        rating: 3.9,
+        image: "n4.jpg"
+      },
+      
+      {
+        name: "Laptop",
+        pname:"HP 15.6 Ryzen 5 Laptop",
+        category: "electronics",
+        price: 17500,
+        rating: 4.8,
+        image: "l1.jpg"
+      },
+      
+      {
+        name: "T-shirt",
+        pname: "Men polo Printed  T-shirt",
+        category: "fashion",
+        price: 270,
+        rating: 2.5,
+        image: "s3.jpg"
+      },
+      {
+        name:"Textbook",
+        pname:"Science",
+        category: "books",
+        price: 750,
+        rating: 4.2,
+        image: "t1.jpg"
+      },
+      {
+        name:"Textbook",
+        pname:"Soil-Science",
+        category: "books",
+        price: 780,
+        rating: 4.4,
+        image: "t2.jpg"
+      },
+      {
+        name:"Textbook",
+        pname:"Textile-Science",
+        category: "books",
+        price: 775,
+        rating: 2.7,
+        image: "t3.jpg"
+      },
+     
+      {
+        name:"Textbook",
+        pname:"Science",
+        category: "books",
+        price: 470,
+        rating: 4.5,
+        image: "t5.jpg"
+      }
+      
+    ];
+
+    const categoryFilter = document.getElementById("categoryFilter");
+    const priceFilter = document.getElementById("priceFilter");
+    const priceLabel = document.getElementById("priceLabel");
+    const sortOption = document.getElementById("sortOption");
+    const productList = document.getElementById("productList");
+
+    function renderProducts() {
+      const selectedCategory = categoryFilter.value;
+      const maxPrice = parseInt(priceFilter.value);
+      const sortValue = sortOption.value;
+
+      let filteredProducts = products.filter(product =>
+        (selectedCategory === "all" || product.category === selectedCategory) &&
+        product.price <= maxPrice
+      );
+
+      switch (sortValue) {
+        case "ratingHigh":
+          filteredProducts.sort((a, b) => b.rating - a.rating);
+          break;
+        case "ratingLow":
+          filteredProducts.sort((a, b) => a.rating - b.rating);
+          break;
+        case "priceHigh":
+          filteredProducts.sort((a, b) => b.price - a.price);
+          break;
+        case "priceLow":
+          filteredProducts.sort((a, b) => a.price - b.price);
+          break;
+      }
+
+
+       productList.innerHTML = "";
+
+      if (filteredProducts.length === 0) {
+        productList.innerHTML = "<p>No products match your filters.</p>";
+        return;
+      }
+
+      filteredProducts.forEach(product => {
+        const productCard = document.createElement("div");
+        productCard.className = "product";
+        productCard.innerHTML = `
+          <img src="${product.image}" alt="${product.name}" class="product-img" loading="lazy" />
+          <h3>${product.name}: ${product.pname}</h3>
+          <p>Category: ${product.category}</p>
+          <p>Price: ₹${product.price}</p>
+          <p>Rating: ⭐ ${product.rating}</p>
+        `;
+        productList.appendChild(productCard);
+      });
+    }
+
+    categoryFilter.addEventListener("change", renderProducts);
+    priceFilter.addEventListener("input", () => {
+      priceLabel.textContent = `Max Price: ₹${priceFilter.value}`;
+      renderProducts();
+    });
+    sortOption.addEventListener("change", renderProducts);
+
+    renderProducts();
+
+  </script>
+</body>
+</html>
