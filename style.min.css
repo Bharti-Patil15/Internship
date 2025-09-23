@@ -1,0 +1,32 @@
+
+body{font-family:'Segoe UI',Tahoma,sans-serif;margin:0;padding:0;line-height:1.6;background:#f4f6f9;color:#333}
+h1,h2,h3{margin:.5em 0}
+a{text-decoration:none}
+
+header{background:linear-gradient(135deg,#1e4e7b,#013370);color:#fff;padding:1.2em;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.2)}
+header h1{margin:0;font-size:2rem;letter-spacing:1px}
+nav{margin-top:.5em}
+nav a{color:#fff;margin:0 12px;font-weight:500;transition:.3s}
+nav a:hover{color:#d19616}
+.products{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5em;padding:2em}
+.card{border:none;border-radius:12px;overflow:hidden;background:#fff;box-shadow:0 4px 12px rgba(0,0,0,.1);transition:.3s;cursor:pointer}
+.card:hover{transform:translateY(-5px);box-shadow:0 6px 18px rgba(0,0,0,.15)}
+.card img{width: 100%;height: 200px;object-fit: contain; background-color: #f0f0f0;border-radius: 8px; margin-bottom: 10px;transition: transform 0.3s ease;}
+.card h3{margin:.8em 0;font-size:1.2rem;color:#222}
+.card p{margin:0;font-weight:600;color:#000c03;font-size:1.1rem}
+
+button{background:#1b7fad;color:#fff;border:none;padding:.6em 1.2em;margin:.3em;cursor:pointer;border-radius:8px;font-size:.9rem;font-weight:600;transition:.3s}
+button:hover{background:#004a78}
+.remove{background:#2b6b88}
+.remove:hover{background:#025074}
+#checkout{background:#267378}
+#checkout:hover{background:#015947}
+
+.cart{padding:1.5em;background:#fff;margin:2em;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,.1)}
+.cart h2{margin-top:0;border-bottom:2px solid #1a7295;padding-bottom:.5em}
+.cart-item{display:flex;justify-content:space-between;align-items:center;padding:.6em 0;border-bottom:1px dashed #ccc}
+.cart-item:last-child{border-bottom:none}
+.cart-item span{margin:0 8px;font-weight:600}
+
+footer{background:#08436d;color:#ccc;text-align:center;padding:1em;margin-top:2em;font-size:.9rem}
+footer p{margin:0}
